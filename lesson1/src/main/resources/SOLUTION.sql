@@ -1,37 +1,38 @@
-CREATE TABLE student (
-    id BIGINT PRIMARY KEY,
+CREATE TABLE student
+(
+    id BIGINT NOT NULL PRIMARY KEY,
     name VARCHAR(45),
     birthday DATE,
-    group INT
+    groupnumber INT
 );
 
 CREATE TABLE subject (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR(45),
-    description VARCHAR(45),
-    grade INT
+    id bigint NOT NULL PRIMARY KEY,
+    name varchar(45),
+    description varchar(45),
+    grade int
 );
 
 CREATE TABLE paymenttype (
-    id BIGINT PRIMARY KEY,
-    name VARCHAR(45)
+    id bigint NOT NULL PRIMARY KEY,
+    name varchar(45)
 );
 
 CREATE TABLE payment (
-    id BIGINT PRIMARY KEY,
-    amount DECIMAL,
-    payment_date TIMESTAMP,
-    type_id BIGINT,
-    FOREIGN KEY (type_id) REFERENCES paymenttype(id),
-    student_id BIGINT,
-    FOREIGN KEY (student_id) REFERENCES student(id)
+    id bigint NOT NULL PRIMARY KEY,
+    type_id bigint,
+    amount decimal,
+    student_id bigint,
+    payment_date timestamp,
+    FOREIGN KEY (type_id) REFERENCES paymenttype (id),
+    FOREIGN KEY (student_id) REFERENCES student (id)
 );
 
 CREATE TABLE mark (
-    id BIGINT PRIMARY KEY,
-    mark INT,
-    student_id BIGINT,
-    FOREIGN KEY (student_id) REFERENCES student(id),
-    subject_id BIGINT,
-    FOREIGN KEY (subject_id) REFERENCES
+    id bigint NOT NULL PRIMARY KEY,
+    student_id bigint,
+    subject_id bigint,
+    mark int,
+    FOREIGN KEY (student_id) REFERENCES student (id),
+    FOREIGN KEY (subject_id) REFERENCES subject (id)
 );
